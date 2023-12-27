@@ -13,7 +13,7 @@ double calculateDryMassFormula1(double weight, double height)
 // Функция для расчета сухой массы тела по формуле #2
 double calculateDryMassFormula2(double weight, double height)
 {
-     return weight - (0.15 * height);
+    return weight - (0.15 * height);
 }
 
 int main(int argc, char *argv[])
@@ -28,18 +28,18 @@ int main(int argc, char *argv[])
     mainWindow.setCentralWidget(formWidget);
 
     // Создание компонентов формы
-    QLabel *weightLabel = new QLabel("Weight (kg):", formWidget);
+    QLabel *weightLabel = new QLabel("Вес (кг):", formWidget);
     QLineEdit *weightLineEdit = new QLineEdit(formWidget);
 
-    QLabel *heightLabel = new QLabel("Height (cm):", formWidget);
+    QLabel *heightLabel = new QLabel("Рост (см):", formWidget);
     QLineEdit *heightLineEdit = new QLineEdit(formWidget);
 
-    QPushButton *calculateButton = new QPushButton("Calculate", formWidget);
-    QLabel *resultLabel = new QLabel("Result:", formWidget);
-    QLabel *averageResultLabel = new QLabel("Average Result:", formWidget);
+    QPushButton *calculateButton = new QPushButton("Рассчитать", formWidget);
+    QLabel *resultLabel = new QLabel("Результат:", formWidget);
+    QLabel *averageResultLabel = new QLabel("Среднее значение:", formWidget);
 
     // Создание компонента для сохранения отчета
-    QPushButton *saveReportButton = new QPushButton("Save Report", formWidget);
+    QPushButton *saveReportButton = new QPushButton("Сохранить данные", formWidget);
 
     // Создание компонентов управления размещением
     QVBoxLayout *layout = new QVBoxLayout(formWidget);
@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
         double averageResult = (resultFormula1 + resultFormula2) / 2.0;
 
         // Вывод результатов на экран
-        resultLabel->setText("Result: " + QString::number(resultFormula1) + " and " + QString::number(resultFormula2));
-        averageResultLabel->setText("Average Result: " + QString::number(averageResult));
+        resultLabel->setText("Результат: " + QString::number(resultFormula1) + " и " + QString::number(resultFormula2));
+        averageResultLabel->setText("Среднее значение: " + QString::number(averageResult));
     });
 
     // Соединение сигнала нажатия кнопки Save Report с обработчиком
@@ -75,18 +75,18 @@ int main(int argc, char *argv[])
         QString averageResultText = averageResultLabel->text();
 
         // Создание диалога сохранения файла
-        QString filePath = QFileDialog::getSaveFileName(&mainWindow, "Save Report", "", "Text Files (*.txt)");
+        QString filePath = QFileDialog::getSaveFileName(&mainWindow, "Сохранить данные", "", "Текстовой файл (*.txt)");
         if (!filePath.isEmpty()) {
             QFile file(filePath);
             if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
                 // Запись результатов в файл
                 QTextStream stream(&file);
-                stream << "| Result: " << resultText << " ";
-                stream << "| Average Result: " << averageResultText << " |";
+                stream << "| " << resultText << " ";
+                stream << "| " << averageResultText << " |";
 
                 file.close();
             } else {
-                QMessageBox::critical(&mainWindow, "Error", "Failed to save the report.");
+                QMessageBox::critical(&mainWindow, "Ошибка!", "Не удалось сохранить данные.");
             }
         }
     });
@@ -95,3 +95,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
